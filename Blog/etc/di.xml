@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="post_data_source" xsi:type="string">Blog\Blog\Model\Post\ResourceModel\Post\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Blog\Blog\Model\Post\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">post</argument>
+            <argument name="eventPrefix" xsi:type="string">blog_post_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">post_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Blog\Blog\Model\Post\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+</config>

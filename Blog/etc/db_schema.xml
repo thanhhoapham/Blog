@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="post" resource="default" engine="innodb">
+        <column xsi:type="int" name="post_id" unsigned="false" nullable="false" identity="true"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="100"/>
+        <column xsi:type="varchar" name="short_description" length="200"/>
+        <column xsi:type="text" name="post_content" nullable="false" />
+        <column xsi:type="tinyint" name="status" />
+        <column xsi:type="varchar" name="thumbnail" length="100" />
+        <column xsi:type="date" name="publish_date_from" />
+        <column xsi:type="date" name="publish_date_to" />
+        <column xsi:type="varchar" name="post_url" length="100" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+<!--         <index referenceId="POST_POST_ID" indexType="btree"> -->
+<!--             <column name="post_id" /> -->
+<!--         </index> -->
+    </table>
+    <table name="category" resource="default" engine="innodb">
+        <column xsi:type="int" name="category_id" identity="true" nullable="false" unsigned="false"/>
+        <column xsi:type="varchar" name="category_name" nullable="false" length="50" />
+        <column xsi:type="varchar" name="category_url" length="100" />
+        <column xsi:type="tinyint" name="parent_id" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+<!--         <index referenceId="CATEGORY_CATEGORY_ID" indexType="btree"> -->
+<!--             <column name="category_id" /> -->
+<!--         </index> -->
+    </table>
+    <table name="post_category" resource="default" engine="innodb">
+        <column xsi:type="int" name="post_id" />
+        <column xsi:type="int" name="category_id" />
+        <constraint xsi:type="foreign" table="post_category" referenceId="POST_CATEGORY_POST_ID_POST_POST_ID"
+        referenceTable="post" referenceColumn="post_id" onDelete="CASCADE"  column="post_id" />
+        <constraint xsi:type="foreign" table="post_category" referenceId="POST_CATEGORY_CATEGORY_ID_CATEGORY_CATEGORY_ID"
+        referenceTable="category" referenceColumn="category_id" onDelete="CASCADE" column="category_id" />
+    </table>
+    <table name="tag" resource="default" engine="innodb">
+        <column xsi:type="int" name="tag_id" identity="true" unsigned="false" nullable="false"/>
+        <column xsi:type="varchar" name="tag_name" length="30" />
+        <column xsi:type="varchar" name="tag_url" length="100" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+        </constraint>
+<!--         <index referenceId="TAG_TAG_ID" indexType="btree"> -->
+<!--             <column name="tag_id" /> -->
+<!--         </index> -->
+    </table>
+    <table name="post_tag" resource="default" engine="innodb" >
+        <column xsi:type="int" name="post_id" />
+        <column xsi:type="int" name="tag_id" />
+        <constraint xsi:type="foreign" table="post_tag" column="post_id" referenceId="POST_TAG_POST_ID_POST_POST_ID"
+        referenceTable="post" referenceColumn="post_id" onDelete="CASCADE" />
+        <constraint xsi:type="foreign" table="post_tag" column="tag_id" referenceId="POST_TAG_TAG_ID_TAG_TAG_ID"
+        referenceTable="tag" referenceColumn="tag_id" onDelete="CASCADE" />
+    </table>
+    <table name="comment" resource="default" engine="innodb">
+        <column xsi:type="int" name="comment_id" identity="true" unsigned="false" nullable="false" />
+        <column xsi:type="text" name="comment_content" nullable="false" />
+        <column xsi:type="int" name="post_id" />
+        <constraint xsi:type="foreign" table="comment" referenceId="COMMENT_COMMENT_ID_POST_POST_ID" column="comment_id"
+        referenceTable="post" referenceColumn="post_id" onDelete="CASCADE" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="comment_id"/>
+        </constraint>
+<!--         <index referenceId="COMMENT_COMMENT_ID" indexType="btree"> -->
+<!--             <column name="comment_id" /> -->
+<!--         </index> -->
+    </table>
+</schema>

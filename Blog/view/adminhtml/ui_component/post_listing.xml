@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE listing [
+        <!ELEMENT listing (argument|settings|dataSource|listingToolbar|columns)*>
+        <!ATTLIST listing
+                xmlns:xsi CDATA #REQUIRED
+                xsi:noNamespaceSchemaLocation CDATA #REQUIRED>
+        <!ELEMENT argument (item)*>
+        <!ATTLIST argument
+                name CDATA #REQUIRED
+                xsi:type CDATA #REQUIRED>
+        <!ELEMENT item (item)*>
+        <!ATTLIST item
+                name CDATA #REQUIRED
+                path CDATA #IMPLIED
+                translate CDATA #IMPLIED
+                xsi:type CDATA #REQUIRED>
+        <!ELEMENT settings (buttons|spinner|deps|storageConfig|updateUrl|requestFieldName|primaryFieldName|sticky|templates|confirm|url|type|label|editorConfig|childDefaults|indexField|filter|sorting|editor)*>
+        <!ELEMENT buttons (button)*>
+        <!ELEMENT button (url|class|label)*>
+        <!ATTLIST button
+                name CDATA #REQUIRED>
+        <!ELEMENT url (#PCDATA)>
+        <!ATTLIST url
+                path CDATA #REQUIRED>
+        <!ELEMENT class (#PCDATA)>
+        <!ELEMENT label (#PCDATA)>
+        <!ATTLIST label
+                translate CDATA #REQUIRED>
+        <!ELEMENT spinner (#PCDATA)>
+        <!ELEMENT deps (dep)*>
+        <!ELEMENT dep (#PCDATA)>
+        <!ELEMENT dataSource (settings|aclResource|dataProvider)*>
+        <!ATTLIST dataSource
+                name CDATA #REQUIRED
+                component CDATA #REQUIRED>
+        <!ELEMENT storageConfig (param)*>
+        <!ELEMENT param (item)*>
+        <!ATTLIST param
+                name CDATA #REQUIRED
+                xsi:type CDATA #REQUIRED>
+        <!ELEMENT updateUrl (#PCDATA)>
+        <!ATTLIST updateUrl
+                path CDATA #REQUIRED>
+        <!ELEMENT aclResource (#PCDATA)>
+        <!ELEMENT dataProvider (settings)*>
+        <!ATTLIST dataProvider
+                class CDATA #REQUIRED
+                name CDATA #REQUIRED>
+        <!ELEMENT requestFieldName (#PCDATA)>
+        <!ELEMENT primaryFieldName (#PCDATA)>
+        <!ELEMENT listingToolbar (settings|bookmark|columnsControls|filterSearch|filters|massaction|paging|exportButton)*>
+        <!ATTLIST listingToolbar
+                name CDATA #REQUIRED>
+        <!ELEMENT sticky (#PCDATA)>
+        <!ELEMENT bookmark (#PCDATA)>
+        <!ATTLIST bookmark
+                name CDATA #REQUIRED>
+        <!ELEMENT columnsControls (#PCDATA)>
+        <!ATTLIST columnsControls
+                name CDATA #REQUIRED>
+        <!ELEMENT filterSearch (#PCDATA)>
+        <!ATTLIST filterSearch
+                name CDATA #REQUIRED>
+        <!ELEMENT filters (settings|select)*>
+        <!ATTLIST filters
+                name CDATA #IMPLIED>
+        <!ELEMENT templates (filters)*>
+        <!ELEMENT select (param)*>
+        <!ELEMENT massaction (action)*>
+        <!ATTLIST massaction
+                name CDATA #REQUIRED>
+        <!ELEMENT action (settings|argument)*>
+        <!ATTLIST action
+                name CDATA #REQUIRED>
+        <!ELEMENT confirm (message|title)*>
+        <!ELEMENT message (#PCDATA)>
+        <!ATTLIST message
+                translate CDATA #REQUIRED>
+        <!ELEMENT title (#PCDATA)>
+        <!ATTLIST title
+                translate CDATA #REQUIRED>
+        <!ELEMENT type (#PCDATA)>
+        <!ELEMENT paging (#PCDATA)>
+        <!ATTLIST paging
+                name CDATA #REQUIRED>
+        <!ELEMENT exportButton (#PCDATA)>
+        <!ATTLIST exportButton
+                name CDATA #REQUIRED>
+        <!ELEMENT columns (settings|selectionsColumn|column|actionsColumn)*>
+        <!ATTLIST columns
+                name CDATA #REQUIRED>
+        <!ELEMENT editorConfig (param)*>
+        <!ELEMENT childDefaults (param)*>
+        <!ELEMENT selectionsColumn (settings)*>
+        <!ATTLIST selectionsColumn
+                name CDATA #REQUIRED>
+        <!ELEMENT indexField (#PCDATA)>
+        <!ELEMENT column (settings)*>
+        <!ATTLIST column
+                name CDATA #REQUIRED>
+        <!ELEMENT filter (#PCDATA)>
+        <!ELEMENT sorting (#PCDATA)>
+        <!ELEMENT editor (validation|editorType)*>
+        <!ELEMENT validation (rule)*>
+        <!ELEMENT rule (#PCDATA)>
+        <!ATTLIST rule
+                name CDATA #REQUIRED
+                xsi:type CDATA #REQUIRED>
+        <!ELEMENT editorType (#PCDATA)>
+        <!ELEMENT actionsColumn (settings)*>
+        <!ATTLIST actionsColumn
+                name CDATA #REQUIRED
+                class CDATA #REQUIRED>
+        ]>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">post_listing.post_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/create"/>
+                <class>primary</class>
+                <label translate="true">Add New Blog</label>
+            </button>
+        </buttons>
+        <spinner>mycms_columns</spinner>
+        <deps>
+            <dep>post_listing.post_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="post_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">post_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Blog_Blog::block</aclResource>
+        <dataProvider class="Magento\Cms\Ui\Component\DataProvider" name="post_data_source">
+            <settings>
+                <requestFieldName>post_id</requestFieldName>
+                <primaryFieldName>post_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="blog/post/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">disable</item>
+                        <item name="label" xsi:type="string" translate="true">Disable</item>
+                        <item name="url" xsi:type="url" path="blog/post/massDisable"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="enable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">enable</item>
+                        <item name="label" xsi:type="string" translate="true">Enable</item>
+                        <item name="url" xsi:type="url" path="blog/post/massEnable"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+    </listingToolbar>
+    <columns name="mycms_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="cms/block/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">post_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">post_listing.post_listing.mycms_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">post_listing.post_listing.mycms_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>post_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="post_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+<!--        <column name="thumbnail" class ="PH\Blog\Ui\Component\Listing\Column\Thumbnail">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>-->
+<!--                    <item name="sortable" xsi:type="boolean">false</item>-->
+<!--                    <item name="altField" xsi:type="string">title</item>-->
+<!--                    <item name="has_preview" xsi:type="string">1</item>-->
+<!--                    <item name="label" xsi:type="string" translate="true">Thumbnail</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </column>-->
+
+        <column name="title">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="short_description">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Short description</label>
+            </settings>
+        </column>
+        <column name="post_content">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Content</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Blog\Blog\Model\Post\ResourceModel\Post\Source\ListStatus"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="publish_date_from" class="Magento\Ui\Component\Listing\Columns\Date">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Publish date from</label>
+            </settings>
+        </column>
+        <column name="publish_date_to" class="Magento\Ui\Component\Listing\Columns\Date">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Publish date to</label>
+            </settings>
+        </column>
+        <column name="post_url">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Url</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Blog\Blog\Ui\Component\Listing\Column\Post\Action">
+            <settings>
+                <indexField>post_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
