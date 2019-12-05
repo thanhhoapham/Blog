@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Blog\Blog\Model\Post\ResourceModel;
+namespace Blog\Blog\Model\ResourceModel;
 
 
 class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb

@@ -17,7 +17,7 @@ class MassEnable extends \Magento\Backend\App\Action
     public function __construct(
         Action\Context $context,
         Filter $filter,
-        \Blog\Blog\Model\Post\ResourceModel\Post\CollectionFactory $blogCollection
+        \Blog\Blog\Model\ResourceModel\Post\CollectionFactory $blogCollection
     )
     {
         $this->filter = $filter;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Blog\Blog\Model\Post\ResourceModel\Post\Source;
+namespace Blog\Blog\Model\ResourceModel\Post\Source;
 
 
 class ListStatus implements \Magento\Framework\Option\ArrayInterface

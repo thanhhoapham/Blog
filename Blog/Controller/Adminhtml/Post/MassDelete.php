@@ -16,7 +16,7 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
     public function __construct(
         Action\Context $context,
         Filter $filter,
-        \Blog\Blog\Model\Post\ResourceModel\Post\CollectionFactory $postCollection
+        \Blog\Blog\Model\ResourceModel\Post\CollectionFactory $postCollection
     )
     {
         $this->filter = $filter;
