@@ -3,11 +3,11 @@
 
 namespace Blog\Blog\Controller\Adminhtml\Post;
 
-
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Ui\Component\MassAction\Filter;
 class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
@@ -39,7 +39,7 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         }
-
-        return $this->_redirect('blog/post/index');
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        return $resultRedirect->setPath('*/*/');
     }
 }

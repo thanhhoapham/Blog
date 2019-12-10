@@ -16,8 +16,8 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Blog\Blog\Block\Post\Edit\SaveButton"/>
-            <button name="back" class="Blog\Blog\Block\Post\Edit\BackButton"/>
+            <button name="save" class="Blog\Blog\Block\Adminhtml\Post\Edit\SaveButton"/>
+            <button name="back" class="Blog\Blog\Block\Adminhtml\Post\Edit\BackButton"/>
         </buttons>
         <namespace>post_creating</namespace>
         <dataScope>data</dataScope>

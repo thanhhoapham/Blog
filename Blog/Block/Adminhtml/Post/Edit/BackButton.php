@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Blog\Blog\Block\Post\Edit;
+namespace Blog\Blog\Block\Adminhtml\Post\Edit;
 
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Blog\Blog\Block\Post\Edit\GenericButton;
+use Blog\Blog\Block\Adminhtml\Post\Edit\GenericButton;
 
-class BackButton extends  GenericButton implements ButtonProviderInterface
+class BackButton extends GenericButton implements ButtonProviderInterface
 {
     public function getButtonData()
     {

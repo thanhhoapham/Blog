@@ -1,7 +1,6 @@
 <?php
 
-
-namespace Blog\Blog\Block\Post\Edit;
+namespace Blog\Blog\Block\Adminhtml\Post\Edit;
 
 use Magento\Backend\Block\Widget\Context;
 use Magento\Cms\Api\BlockRepositoryInterface;
@@ -33,8 +32,9 @@ class GenericButton
      *
      * @return int|null
      */
-    public function getBlockId()
+    public function getPostId()
     {
+
         try {
             return $this->blockRepository->getById(
                 $this->context->getRequest()->getParam('post_id')

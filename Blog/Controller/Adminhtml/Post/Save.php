@@ -5,85 +5,92 @@ namespace Blog\Blog\Controller\Adminhtml\Post;
 
 
 use Magento\Backend\App\Action;
+use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Setup\Exception;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Registry;
+use Blog\Blog\Model\Post;
+use Blog\Blog\Model\PostFactory;
+use Blog\Blog\Api\PostRepositoryInterface;
 
-class Save extends \Magento\Backend\App\Action
+
+
+class Save extends \Blog\Blog\Controller\Adminhtml\Post implements HttpPostActionInterface
 {
     protected $dataPersistor;
-    protected $postFactory;
+    private $postFactory;
+    private $postRepository;
 
     public function __construct(
         Action\Context $context,
-        \Blog\Blog\Model\PostFactory $postFactory
+        Registry $coreRegistry,
+        DataPersistorInterface $dataPersistor,
+        PostFactory $postFactory = null ,
+        PostRepositoryInterface $postRepository = null
     )
     {
+        $this->dataPersistor = $dataPersistor;
+        $this->postRepository = $postRepository;
         $this->postFactory = $postFactory;
-        parent::__construct($context);
+        parent::__construct($context, $coreRegistry);
     }
 
     /**
      * @inheritDoc
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function execute()
     {
-        $posts = $this->getRequest()->getPostValue();
-//        var_dump($posts);die;
-        $id = $this->getRequest()->getParam('post_id');
-        if (!empty($posts)) {
-            $blog = $this->postFactory->create();
-            // edit blog
-            if ($id) {
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $data = $this->getRequest()->getPostValue();
+        if($data) {
+
+            $model = $this->postFactory->create();
+            $id = $this->getRequest()->getParam('post_id');
+            if($id) {
                 try {
-                    $this->savePost($blog->load($id), $posts);
-                    return $this->_redirect('blog/post/create', ['post_id' => $id]);
+                    $model = $this->postRepository->getById($id);
                 } catch (\Exception $e) {
-                    $this->messageManager->addErrorMessage('Fail to edit this blog');
-                    return $this->_redirect('blog/post/create', ['post_id' => $id]);
-                }
-            } else {
-                try {
-                    $this->savePost($blog, $posts);
-                } catch (\Exception $e) {
-                    $this->messageManager->addErrorMessage('Fail to add a new blog');
-                    return $this->_redirect('blog/post/create');
+                    $this->messageManager->addErrorMessage(__($e->getMessage()));
+                    return $resultRedirect->setPath('*/*/');
                 }
             }
+            $model->setData($data);
+            try {
+                $this->postRepository->save($model);
+                $this->messageManager->addSuccessMessage(__('You saved the blog'));
+                $this->dataPersistor->clear('blog_post');
+                return $this->processPostReturn($model, $data, $resultRedirect);
+            } catch (LocalizedException $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+            } catch (\Exception $e) {
+                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving th blog'));
+            }
         }
-
-        return $this->_redirect('blog/post/index');
     }
 
-    public function savePost($blog, $posts)
+    private function processPostReturn($model, $data, $resultRedirect)
     {
-        if (!empty($posts['title']) && $this->validateTitle($posts['title'])) {
-            $blog->setData('title', $posts['title']);
-        } else {
-            $this->messageManager->addErrorMessage('Title is not valid');
-            return $this->_redirect('blog/post/create');
-        }
-        $blog->setData('short_description', $posts['short_description']);
-        $blog->setData('post_content', $posts['post_content']);
-        $blog->setData('status', $posts['status']);
+        $redirect = $data['back'] ?? 'close';
 
-        if ($this->validateDate($posts['publish_date_from'], $posts['publish_date_to'])) {
-            $blog->setData('publish_date_to', $posts['publish_date_to']);
-            $blog->setData('publish_date_from', $posts['publish_date_from']);
-        } else {
-            $this->messageManager->addErrorMessage('Date start is greater than date finish');
-            return $this->_redirect('blog/post/create');
+        if ($redirect ==='continue') {
+            $resultRedirect->setPath('*/*/edit', ['block_id' => $model->getId()]);
+        } else if ($redirect === 'close') {
+            $resultRedirect->setPath('*/*/');
+        } else if ($redirect === 'duplicate') {
+            $duplicateModel = $this->postFactory->create(['data' => $data]);
+            $duplicateModel->setId(null);
+//            $duplicateModel->setIdentifier($data['identifier'] . '-' . uniqid());
+//            $duplicateModel->setIsActive(Block::STATUS_DISABLED);
+            $this->postRepository->save($duplicateModel);
+            $id = $duplicateModel->getId();
+            $this->messageManager->addSuccessMessage(__('You duplicated the block.'));
+            $this->dataPersistor->set('cms_block', $data);
+            $resultRedirect->setPath('*/*/edit', ['post_id' => $id]);
         }
-        if(!empty($posts['post_id'])) {
-            $this->messageManager->addSuccessMessage("Success to edit this blog");
-        } else {
-            $this->messageManager->addSuccessMessage("Success to add a new blog");
-        }
-
-        $blog->save();
+        return $resultRedirect;
     }
-
-
     protected function validateDate($dateStart, $dateFinish)
     {
         if (strtotime($dateStart) > strtotime($dateFinish)) {
