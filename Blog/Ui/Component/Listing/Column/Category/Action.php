@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Blog\Blog\Ui\Component\Listing\Column\Post;
+namespace Blog\Blog\Ui\Component\Listing\Column\Category;
 
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -11,8 +11,8 @@ use Magento\Framework\UrlInterface;
 
 class Action extends Column
 {
-    const BLOG_URL_PATH_EDIT = 'blog/post/edit';
-    const BLOG_URL_PATH_DELETE = 'blog/post/delete';
+    const BLOG_URL_PATH_EDIT = 'blog/category/edit';
+    const BLOG_URL_PATH_DELETE = 'blog/category/delete';
     protected $urlBuilder;
     private $editUrl;
     public function __construct(
@@ -33,17 +33,17 @@ class Action extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
                 $name = $this->getData('name');
-                if (isset($item['post_id'])) {
+                if (isset($item['category_id'])) {
                     $item[$name]['edit'] = [
-                        'href' => $this->urlBuilder->getUrl(self::BLOG_URL_PATH_EDIT, ['post_id' => $item['post_id']]),
+                        'href' => $this->urlBuilder->getUrl(self::BLOG_URL_PATH_EDIT, ['category_id' => $item['category_id']]),
                         'label' => __('Edit')
                     ];
                     $item[$name]['delete'] = [
-                        'href' => $this->urlBuilder->getUrl(self::BLOG_URL_PATH_DELETE, ['post_id' => $item['post_id']]),
+                        'href' => $this->urlBuilder->getUrl(self::BLOG_URL_PATH_DELETE, ['category_id' => $item['category_id']]),
                         'label' => __('Delete'),
                         'confirm' => [
-                            'title' => __('Delete "${ $.$data.title }"'),
-                            'message' => __('Are you sure you wan\'t to delete a "${ $.$data.title }" record?')
+                            'title' => __('Delete "${ $.$data.category_name}"'),
+                            'message' => __('Are you sure you wan\'t to delete a "${ $.$data.category_name }" record?')
                         ]
                     ];
                 }

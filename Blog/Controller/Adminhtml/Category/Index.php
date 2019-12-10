@@ -1,17 +1,14 @@
 <?php
 
 
-namespace Blog\Blog\Controller\Index;
+namespace Blog\Blog\Controller\Adminhtml\Category;
+use Magento\Backend\App\Action;
 
-
-use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\ResponseInterface;
-
-class Index extends \Magento\Framework\App\Action\Action
+class Index extends \Magento\Backend\App\Action
 {
     protected $pageFactory;
     public function __construct(
-        Context $context,
+        Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory
     )
     {
@@ -19,11 +16,8 @@ class Index extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function execute()
     {
-        echo "Hello";
+        return $this->pageFactory->create();
     }
 }

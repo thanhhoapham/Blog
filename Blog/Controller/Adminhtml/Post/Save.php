@@ -26,8 +26,8 @@ class Save extends \Blog\Blog\Controller\Adminhtml\Post implements HttpPostActio
         Action\Context $context,
         Registry $coreRegistry,
         DataPersistorInterface $dataPersistor,
-        PostFactory $postFactory = null ,
-        PostRepositoryInterface $postRepository = null
+        PostFactory $postFactory  ,
+        PostRepositoryInterface $postRepository
     )
     {
         $this->dataPersistor = $dataPersistor;
@@ -75,7 +75,7 @@ class Save extends \Blog\Blog\Controller\Adminhtml\Post implements HttpPostActio
         $redirect = $data['back'] ?? 'close';
 
         if ($redirect ==='continue') {
-            $resultRedirect->setPath('*/*/edit', ['block_id' => $model->getId()]);
+            $resultRedirect->setPath('*/*/edit', ['post_id' => $model->getId()]);
         } else if ($redirect === 'close') {
             $resultRedirect->setPath('*/*/');
         } else if ($redirect === 'duplicate') {
@@ -86,7 +86,7 @@ class Save extends \Blog\Blog\Controller\Adminhtml\Post implements HttpPostActio
             $this->postRepository->save($duplicateModel);
             $id = $duplicateModel->getId();
             $this->messageManager->addSuccessMessage(__('You duplicated the block.'));
-            $this->dataPersistor->set('cms_block', $data);
+            $this->dataPersistor->set('blog_post', $data);
             $resultRedirect->setPath('*/*/edit', ['post_id' => $id]);
         }
         return $resultRedirect;

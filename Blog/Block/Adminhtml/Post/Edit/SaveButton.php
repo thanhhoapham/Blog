@@ -20,7 +20,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     'buttonAdapter' => [
                         'actions' => [
                             [
-                                'targetName' => 'post_listing',
+                                'targetName' => 'post_listing.post_listing',
                                 'actionName' => 'save',
                                 'params' => [
                                     true,
@@ -33,58 +33,58 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     ]
                 ]
             ],
-//            'class_name' => Container::SPLIT_BUTTON,
-//            'options' => $this->getOptions(),
+            'class_name' => Container::SPLIT_BUTTON,
+            'options' => $this->getOptions(),
         ];
     }
-//    private function getOptions()
-//    {
-//        $options = [
-//            [
-//                'label' => __('Save & Duplicate'),
-//                'id_hard' => 'save_and_duplicate',
-//                'data_attribute' => [
-//                    'mage-init' => [
-//                        'buttonAdapter' => [
-//                            'actions' => [
-//                                [
-//                                    'targetName' => 'post_listing',
-//                                    'actionName' => 'save',
-//                                    'params' => [
-//                                        true,
-//                                        [
-//                                            'back' => 'duplicate'
-//                                        ]
-//                                    ]
-//                                ]
-//                            ]
-//                        ]
-//                    ]
-//                ]
-//            ],
-//            [
-//                'id_hard' => 'save_and_close',
-//                'label' => __('Save & Close'),
-//                'data_attribute' => [
-//                    'mage-init' => [
-//                        'buttonAdapter' => [
-//                            'actions' => [
-//                                [
-//                                    'targetName' => 'post_listing',
-//                                    'actionName' => 'save',
-//                                    'params' => [
-//                                        true,
-//                                        [
-//                                            'back' => 'close'
-//                                        ]
-//                                    ]
-//                                ]
-//                            ]
-//                        ]
-//                    ]
-//                ]
-//            ]
-//        ];
-//        return $options;
-//    }
+    private function getOptions()
+    {
+        $options = [
+            [
+                'label' => __('Save & Duplicate'),
+                'id_hard' => 'save_and_duplicate',
+                'data_attribute' => [
+                    'mage-init' => [
+                        'buttonAdapter' => [
+                            'actions' => [
+                                [
+                                    'targetName' => 'post_listing.post_listing',
+                                    'actionName' => 'save',
+                                    'params' => [
+                                        true,
+                                        [
+                                            'back' => 'duplicate'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'id_hard' => 'save_and_close',
+                'label' => __('Save & Close'),
+                'data_attribute' => [
+                    'mage-init' => [
+                        'buttonAdapter' => [
+                            'actions' => [
+                                [
+                                    'targetName' => 'post_listing.post_listing',
+                                    'actionName' => 'save',
+                                    'params' => [
+                                        true,
+                                        [
+                                            'back' => 'close'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        return $options;
+    }
 }
