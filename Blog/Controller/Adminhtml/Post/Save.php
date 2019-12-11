@@ -81,8 +81,6 @@ class Save extends \Blog\Blog\Controller\Adminhtml\Post implements HttpPostActio
         } else if ($redirect === 'duplicate') {
             $duplicateModel = $this->postFactory->create(['data' => $data]);
             $duplicateModel->setId(null);
-//            $duplicateModel->setIdentifier($data['identifier'] . '-' . uniqid());
-//            $duplicateModel->setIsActive(Block::STATUS_DISABLED);
             $this->postRepository->save($duplicateModel);
             $id = $duplicateModel->getId();
             $this->messageManager->addSuccessMessage(__('You duplicated the block.'));

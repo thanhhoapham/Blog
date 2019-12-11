@@ -49,7 +49,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
         $data = $this->dataPersistor->get('blog_post');
 //        var_dump($data);
         if(!empty($data)) {
-            $page = $this->collectionFactory->getNewEmptyItem();
+            $page = $this->collectionFactory->create();
             $page = $this->setData($data);
             $this->loadedData[$page->getId()] = $page->getData();
             $this->dataPersistor->clear('blog_post');

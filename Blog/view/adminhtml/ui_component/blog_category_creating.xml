@@ -9,7 +9,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">category_creating.category_data_source</item>
+            <item name="provider" xsi:type="string">blog_category_creating.category_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">Category Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -19,10 +19,10 @@
             <button name="save" class="Blog\Blog\Block\Adminhtml\Post\Edit\SaveButton"/>
             <button name="back" class="Blog\Blog\Block\Adminhtml\Post\Edit\BackButton"/>
         </buttons>
-        <namespace>category_creating</namespace>
+        <namespace>blog_category_creating</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>category_creating.category_data_source</dep>
+            <dep>blog_category_creating.category_data_source</dep>
         </deps>
     </settings>
     <dataSource name="category_data_source">
@@ -59,19 +59,24 @@
                 <label translate="true">Title</label>
             </settings>
         </field>
-        <field name="short_description" formElement="input">
+        <field name="parent_id" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">category</item>
                 </item>
             </argument>
             <settings>
-                <!--                <validation>-->
-                <!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
-                <!--                </validation>-->
                 <dataType>text</dataType>
-                <label translate="true">Short description</label>
+                <label translate="true">Parent Category</label>
             </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class='Blog\Blog\Model\ResourceModel\Category\Source\ListCategory' />
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
         </field>
     </fieldset>
 </form>

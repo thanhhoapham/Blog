@@ -9,7 +9,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">post_creating.post_data_source</item>
+            <item name="provider" xsi:type="string">blog_post_creating.post_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">Post Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -19,10 +19,10 @@
             <button name="save" class="Blog\Blog\Block\Adminhtml\Post\Edit\SaveButton"/>
             <button name="back" class="Blog\Blog\Block\Adminhtml\Post\Edit\BackButton"/>
         </buttons>
-        <namespace>post_creating</namespace>
+        <namespace>blog_post_creating</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>post_creating.post_data_source</dep>
+            <dep>blog_post_creating.post_data_source</dep>
         </deps>
     </settings>
     <dataSource name="post_data_source">

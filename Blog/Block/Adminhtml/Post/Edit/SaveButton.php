@@ -20,7 +20,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     'buttonAdapter' => [
                         'actions' => [
                             [
-                                'targetName' => 'post_listing.post_listing',
+                                'targetName' => 'post_creating.post_creating',
                                 'actionName' => 'save',
                                 'params' => [
                                     true,
@@ -48,7 +48,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                         'buttonAdapter' => [
                             'actions' => [
                                 [
-                                    'targetName' => 'post_listing.post_listing',
+                                    'targetName' => 'post_creating.post_creating',
                                     'actionName' => 'save',
                                     'params' => [
                                         true,
@@ -70,7 +70,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                         'buttonAdapter' => [
                             'actions' => [
                                 [
-                                    'targetName' => 'post_listing.post_listing',
+                                    'targetName' => 'post_creating.post_creating',
                                     'actionName' => 'save',
                                     'params' => [
                                         true,
