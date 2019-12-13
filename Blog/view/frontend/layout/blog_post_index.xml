@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <head>
+        <css src="Blog_Blog/css/style.css"/>
+        <css src="Blog_Blog/css/sidebar.css"/>
+        <css src="Blog_Blog/css/post.css"/>
+        <css src="Blog_Blog/css/menu.css"/>
+        <css src="Blog_Blog/css/paginate.css"/>
+        <css src="Blog_Blog/libs/daterangepicker.css"/>
+        <link src="Blog_Blog/js/menu.js"/>
+        <link src="Blog_Blog/js/script.js"/>
+    </head>
+    <referenceContainer name="sidebar.main">
+        <block class="Blog\Blog\Block\Frontend\SideBar" name="blog_frontend_sidbarleft" template="Blog_Blog::sidebar.phtml"/>
+    </referenceContainer>
+    <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+    <referenceBlock name="wishlist_sidebar" remove="true" />
+
+    <referenceContainer name="content">
+        <block class="Blog\Blog\Block\Frontend\Index" name="Blog_frontend_content" template="Blog_Blog::index.phtml" />
+    </referenceContainer>
+
+</page>

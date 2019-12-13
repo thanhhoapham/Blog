@@ -16,8 +16,8 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Blog\Blog\Block\Adminhtml\Post\Edit\SaveButton"/>
-            <button name="back" class="Blog\Blog\Block\Adminhtml\Post\Edit\BackButton"/>
+            <button name="save" class="Blog\Blog\Block\Adminhtml\Category\Edit\SaveButton"/>
+            <button name="back" class="Blog\Blog\Block\Adminhtml\Category\Edit\BackButton"/>
         </buttons>
         <namespace>blog_category_creating</namespace>
         <dataScope>data</dataScope>
@@ -32,16 +32,16 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="blog/post/save"/>
+            <submitUrl path="blog/category/save"/>
         </settings>
-        <dataProvider class="Blog\Blog\Model\Post\DataProvider" name="category_data_source">
+        <dataProvider class="Blog\Blog\Model\Category\DataProvider" name="category_data_source">
             <settings>
                 <requestFieldName>category_id</requestFieldName>
                 <primaryFieldName>category_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
-    <fieldset name="posts">
+    <fieldset name="categories">
         <settings>
             <label/>
         </settings>

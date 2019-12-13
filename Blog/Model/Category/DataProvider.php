@@ -3,6 +3,7 @@
 
 namespace Blog\Blog\Model\Category;
 
+use Blog\Blog\Model\Category;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
 class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
@@ -68,7 +69,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 
     protected function _afterLoad()
     {
-        $entityMetadata = $this->metadataPool->getMetadata(BlogInterface::class);
+        $entityMetadata = $this->metadataPool->getMetadata(CategoryInterface::class);
         $this->performAfterLoad('blog_category', $entityMetadata->getLinkField());
         $this->_previewFlag = false;
 

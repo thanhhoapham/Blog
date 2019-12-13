@@ -56,8 +56,8 @@ class Save extends \Blog\Blog\Controller\Adminhtml\Post implements HttpPostActio
                 }
             }
             $model->setData($data);
-            $model->setThumbnail($thumbnail);
-            $this->saveImage($data, $model, $thumbnail);
+//            $model->setThumbnail($thumbnail);
+//            $this->saveImage($data, $model, $thumbnail);
             try {
                 $this->postRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the blog'));

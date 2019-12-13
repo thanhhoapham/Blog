@@ -89,7 +89,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 
     protected function _afterLoad()
     {
-        $entityMetadata = $this->metadataPool->getMetadata(BlogInterface::class);
+        $entityMetadata = $this->metadataPool->getMetadata(PostInterface::class);
         $this->performAfterLoad('blog_post', $entityMetadata->getLinkField());
         $this->_previewFlag = false;
 

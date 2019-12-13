@@ -4,5 +4,6 @@
         <add id="Blog_Blog::blog" title="Blog" module="Blog_Blog" sortOrder="10" resource="Blog_Blog::blog"/>
         <add id="Blog_Blog::post" title="Blog List" module="Blog_Blog" sortOrder="10" action="blog/post/index" resource="Blog_Blog::post" parent="Blog_Blog::blog"/>
         <add id="Blog_Blog::category" title="Category" module="Blog_Blog" sortOrder="10" action="blog/category/index" resource="Blog_Blog::category" parent="Blog_Blog::blog"/>
+        <add id="Blog_Blog::comment" title="Comment" module="Blog_Blog" sortOrder="10" action="blog/comment/index" resource="Blog_Blog::comment" parent="Blog_Blog::blog"/>
     </menu>
 </config>

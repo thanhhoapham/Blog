@@ -2,21 +2,38 @@
 
 
 namespace Blog\Blog\Model;
-
-
-use Blog\Blog\Api\Blog;
 use Blog\Blog\Api\CategoryRepositoryInterface;
 use Blog\Blog\Api\Data;
+use Blog\Blog\Model\ResourceModel\Category as ResourcePost;
+use Magento\Store\Model\StoreManagerInterface;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
+    protected $categoryFactory;
+    protected $resource;
+    protected $storeManager;
+    public function __construct(
+        ResourcePost $resource,
+        CategoryFactory $categoryFactory,
+        StoreManagerInterface $storeManager
+    )
+    {
+        $this->resource = $resource;
+        $this->categoryFactory = $categoryFactory;
+        $this->storeManager = $storeManager;
+    }
 
     /**
      * @inheritDoc
+     * @throws \Exception
      */
     public function save(Data\CategoryInterface $category)
     {
-        // TODO: Implement save() method.
+        try {
+            $this->resource->save($category);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -24,7 +41,12 @@ class CategoryRepository implements CategoryRepositoryInterface
      */
     public function getById($categoryId)
     {
-        // TODO: Implement getById() method.
+        $category = $this->categoryFactory->create();
+        $this->resource->load($category, $categoryId);
+        if(!$category->getId()) {
+            throw new Exception(__('The blog with the "%1" ID doesn\'t exists', $categoryId));
+        }
+        return $category;
     }
 
     /**

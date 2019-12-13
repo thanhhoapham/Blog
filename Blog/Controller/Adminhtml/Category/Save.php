@@ -50,6 +50,7 @@ class Save extends \Blog\Blog\Controller\Adminhtml\Category implements HttpPostA
                     return $resultRedirect->setPath('*/*/');
                 }
             }
+            $model->setData($data);
             try {
                 $this->categoryRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the category'));
