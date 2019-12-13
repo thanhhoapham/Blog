@@ -2,9 +2,12 @@
 
 
 namespace Blog\Blog\Controller\Adminhtml\Category;
-use Magento\Backend\App\Action;
 
-class Index extends \Magento\Backend\App\Action
+
+use Magento\Backend\App\Action;
+use Magento\Framework\App\ResponseInterface;
+
+class Edit extends \Magento\Backend\App\Action
 {
     protected $pageFactory;
     public function __construct(
@@ -16,8 +19,17 @@ class Index extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
+    /**
+     * Execute action based on request and return result
+     *
+     * Note: Request will be added as operation argument in future
+     *
+     * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
+     * @throws \Magento\Framework\Exception\NotFoundException
+     */
     public function execute()
     {
         return $this->pageFactory->create();
+
     }
 }

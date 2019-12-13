@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Blog\Blog\Controller\Adminhtml\Post;
+namespace Blog\Blog\Controller\Adminhtml\Category;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -12,15 +12,15 @@ use Magento\Ui\Component\MassAction\Filter;
 class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
     protected $filter;
-    protected $postCollection;
+    protected $categoryCollection;
     public function __construct(
         Action\Context $context,
         Filter $filter,
-        \Blog\Blog\Model\ResourceModel\Post\CollectionFactory $postCollection
+        \Blog\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollection
     )
     {
         $this->filter = $filter;
-        $this->postCollection = $postCollection;
+        $this->categoryCollection = $categoryCollection;
         parent::__construct($context);
     }
 
@@ -29,7 +29,7 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
      */
     public function execute()
     {
-        $collection = $this->filter->getCollection($this->postCollection->create());
+        $collection = $this->filter->getCollection($this->categoryCollection->create());
         $collectionSize = $collection->getSize();
         try {
             foreach ($collection as $item) {

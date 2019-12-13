@@ -11,7 +11,7 @@
             <button name="add">
                 <url path="*/*/create"/>
                 <class>primary</class>
-                <label translate="true">Add New Blog</label>
+                <label translate="true">Add New Category</label>
             </button>
         </buttons>
         <spinner>mycms_columns</spinner>
@@ -60,28 +60,10 @@
                         <message translate="true">Are you sure you want to delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="blog/post/massDelete"/>
+                    <url path="blog/category/massDelete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
-            </action>
-            <action name="disable">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">disable</item>
-                        <item name="label" xsi:type="string" translate="true">Disable</item>
-                        <item name="url" xsi:type="url" path="blog/post/massDisable"/>
-                    </item>
-                </argument>
-            </action>
-            <action name="enable">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">enable</item>
-                        <item name="label" xsi:type="string" translate="true">Enable</item>
-                        <item name="url" xsi:type="url" path="blog/post/massEnable"/>
-                    </item>
-                </argument>
             </action>
         </massaction>
         <paging name="listing_paging"/>

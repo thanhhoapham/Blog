@@ -1,6 +1,7 @@
 <?php
 
-namespace Blog\Blog\Block\Adminhtml\Post\Edit;
+
+namespace Blog\Blog\Block\Adminhtml\Category\Edit;
 
 use Magento\Backend\Block\Widget\Context;
 use Magento\Cms\Api\BlockRepositoryInterface;
@@ -37,7 +38,7 @@ class GenericButton
 
         try {
             return $this->blockRepository->getById(
-                $this->context->getRequest()->getParam('post_id')
+                $this->context->getRequest()->getParam('category_id')
             )->getId();
         } catch (NoSuchEntityException $e) {
         }

@@ -1,12 +1,10 @@
 <?php
 
 
-namespace Blog\Blog\Model\Post;
-
+namespace Blog\Blog\Model\Category;
 
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
-
 class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 {
     protected $collectionFactory;
@@ -18,7 +16,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        \Blog\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory,
+        \Blog\Blog\Model\ResourceModel\Category\CollectionFactory $collectionFactory,
         DataPersistorInterface $dataPersistor,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $meta = [],
@@ -45,40 +43,21 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 
     public function getData()
     {
-        $baseurl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
         if (isset($this->loadedData)) {
             return $this->loadedData;
         }
         $items = $this->collectionFactory->create();
         foreach ($items as $page) {
             $this->loadedData[$page->getId()] = $page->getData();
-//            $temp = $page->getData();
-//            if ($temp['thumbnail']):
-//                $img = [];
-//                $img[0]['thumbnail'] = $temp['thumbnail'];
-//                $img[0]['url'] = $baseurl . 'blog/' . $temp['thumbnail'];
-//                $temp['logo'] = $img;
-//            endif;
         }
-        $data = $this->dataPersistor->get('blog_post');
+        $data = $this->dataPersistor->get('blog_category');
 //        var_dump($data);
         if (!empty($data)) {
             $page = $this->collectionFactory->create();
             $page = $this->setData($data);
             $this->loadedData[$page->getId()] = $page->getData();
-            $this->dataPersistor->clear('blog_post');
+            $this->dataPersistor->clear('blog_category');
         }
-//        else {
-//            if ($items):
-//                if ($page->getData('thumbnail') != null) {
-//                    $t2[$page->getId()] = $temp;
-//                    return $t2;
-//                } else {
-//                    return $this->loadedData;
-//                }
-//            endif;
-//        }
-//        var_dump($this->loadedData);die;
         return $this->loadedData;
     }
 
@@ -90,7 +69,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
     protected function _afterLoad()
     {
         $entityMetadata = $this->metadataPool->getMetadata(BlogInterface::class);
-        $this->performAfterLoad('blog_post', $entityMetadata->getLinkField());
+        $this->performAfterLoad('blog_category', $entityMetadata->getLinkField());
         $this->_previewFlag = false;
 
         return parent::_afterLoad();

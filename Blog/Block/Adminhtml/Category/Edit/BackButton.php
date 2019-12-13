@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Blog\Blog\Block\Adminhtml\Post\Edit;
+namespace Blog\Blog\Block\Adminhtml\Category\Edit;
 
 
+use Blog\Blog\Block\Adminhtml\Category\Edit\GenericButton;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Blog\Blog\Block\Adminhtml\Post\Edit\GenericButton;
 
 class BackButton extends GenericButton implements ButtonProviderInterface
 {

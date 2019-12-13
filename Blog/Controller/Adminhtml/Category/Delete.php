@@ -1,36 +1,32 @@
 <?php
 
 
-namespace Blog\Blog\Controller\Adminhtml\Post;
-
+namespace Blog\Blog\Controller\Adminhtml\Category;
 
 use Magento\Framework\App\ResponseInterface;
 use Magento\Backend\App\Action;
 use Magento\Setup\Exception;
-
 class Delete extends \Magento\Backend\App\Action
 {
-
-    protected $postFactory;
+    protected $categoryFactory;
 
     public function __construct(
         Action\Context $context,
-        \Blog\Blog\Model\PostFactory $postFactory
+        \Blog\Blog\Model\CategoryFactory $categoryFactory
     )
     {
-        $this->postFactory = $postFactory;
+        $this->categoryFactory = $categoryFactory;
         parent::__construct($context);
     }
 
     public function execute()
     {
         $blog = $this->getRequest()->getPostValue();
-//        var_dump(isset($blog));die;
-        $id = $this->getRequest()->getParam('post_id');
+        $id = $this->getRequest()->getParam('category_id');
         if (isset($blog)) {
             try {
                 if ($id) {
-                    $blog = $this->postFactory->create()->load($id);
+                    $blog = $this->categoryFactory->create()->load($id);
                     $blog->delete();
                     $this->messageManager->addSuccessMessage('Success to delete');
                 }
@@ -38,6 +34,6 @@ class Delete extends \Magento\Backend\App\Action
                 $this->messageManager->addErrorMessage('Fail to delete');
             }
         }
-        return $this->_redirect('blog/post/index');
+        return $this->_redirect('blog/category/index');
     }
 }

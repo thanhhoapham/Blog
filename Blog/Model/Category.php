@@ -6,7 +6,7 @@ namespace Blog\Blog\Model;
 
 use Blog\Blog\Api\Data\CategoryInterface;
 
-class Category extends \Magento\Framework\Model\AbstractMode implements CategoryInterface
+class Category extends \Magento\Framework\Model\AbstractModel implements CategoryInterface
 {
     protected function _construct()
     {

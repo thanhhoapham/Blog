@@ -2,11 +2,9 @@
 
 
 namespace Blog\Blog\Controller\Adminhtml;
-
-
 use Magento\Backend\App\Action;
 
-abstract class Post extends \Magento\Backend\App\Action
+abstract class Category extends \Magento\Backend\App\Action
 {
     /**
      * Core registry
@@ -22,13 +20,4 @@ abstract class Post extends \Magento\Backend\App\Action
         $this->_coreRegistry = $coreRegistry;
         parent::__construct($context);
     }
-//    protected function initPage($resultPage)
-//    {
-//        $resultPage->setActiveMenu('Blog_Blog::blog_post')
-//            ->addBreadcrumb(__('Blog'), __('Blog'))
-//            ->addBreadcrumb(__('Static Blocks'), __('Static Blocks'));
-//        return $resultPage;
-//    }
-
 }
-

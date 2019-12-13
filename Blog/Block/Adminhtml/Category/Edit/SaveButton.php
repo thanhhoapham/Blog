@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Blog\Blog\Block\Adminhtml\Post\Edit;
+namespace Blog\Blog\Block\Adminhtml\Category\Edit;
 
 
+use Blog\Blog\Block\Adminhtml\Category\Edit\GenericButton;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Blog\Blog\Block\Adminhtml\Post\Edit\GenericButton;
 use Magento\Ui\Component\Control\Container;
 
 class SaveButton extends GenericButton implements ButtonProviderInterface
@@ -20,7 +20,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     'buttonAdapter' => [
                         'actions' => [
                             [
-                                'targetName' => 'blog_post_creating.blog_post_creating',
+                                'targetName' => 'blog_category_creating.blog_category_creating',
                                 'actionName' => 'save',
                                 'params' => [
                                     true,
@@ -48,7 +48,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                         'buttonAdapter' => [
                             'actions' => [
                                 [
-                                    'targetName' => 'blog_post_creating.blog_post_creating',
+                                    'targetName' => 'blog_category_creating.blog_category_creating',
                                     'actionName' => 'save',
                                     'params' => [
                                         true,
@@ -70,7 +70,7 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                         'buttonAdapter' => [
                             'actions' => [
                                 [
-                                    'targetName' => 'blog_post_creating.blog_post_creating',
+                                    'targetName' => 'blog_category_creating.blog_category_creating',
                                     'actionName' => 'save',
                                     'params' => [
                                         true,

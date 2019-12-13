@@ -19,10 +19,10 @@
     </type>
     <type name="Blog\Blog\Controller\Adminhtml\Post\Upload">
         <arguments>
-            <argument name="imageUploader" xsi:type="object">Blog\Blog\PostImageUploader</argument>
+            <argument name="imageUploader" xsi:type="object">Blog\Blog\PostUpload</argument>
         </arguments>
     </type>
-    <virtualType name="Blog\Blog\BlogImageUploader" type="Blog\Blog\Model\ImageUploader">
+    <virtualType name="Blog\Blog\PostUpload" type="Blog\Blog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">blog/tmp</argument>
             <argument name="basePath" xsi:type="string">blog</argument>

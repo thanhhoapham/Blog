@@ -15,6 +15,7 @@ interface PostInterface
     const START_DATE = "publish_date_from";
     const FINISH_DATE = "publish_date_to";
     const POST_URL = "post_url";
+    const IMAGE_DIRECTORY = "pub/media/blog";
 
     public function getId();
 
