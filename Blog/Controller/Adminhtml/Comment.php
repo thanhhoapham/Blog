@@ -2,16 +2,16 @@
 
 
 namespace Blog\Blog\Controller\Adminhtml;
-use Magento\Backend\App\Action;
 
-abstract class Category extends \Magento\Backend\App\Action
+use Magento\Backend\App\Action;
+abstract class Comment extends \Magento\Backend\App\Action
 {
     /**
      * Authorization level of a basic admin session
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = "Blog_Blog::category";
+    const ADMIN_RESOURCE = "Blog_Blog::comment";
     /**
      * Core registry
      *
@@ -26,4 +26,5 @@ abstract class Category extends \Magento\Backend\App\Action
         $this->_coreRegistry = $coreRegistry;
         parent::__construct($context);
     }
+
 }

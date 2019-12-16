@@ -9,6 +9,12 @@ use Magento\Backend\App\Action;
 abstract class Post extends \Magento\Backend\App\Action
 {
     /**
+     * Authorization level of a basic admin session
+     *
+     * @see _isAllowed()
+     */
+    const ADMIN_RESOURCE = "Blog_Blog::post";
+    /**
      * Core registry
      *
      * @var \Magento\Framework\Registry

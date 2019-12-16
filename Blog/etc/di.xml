@@ -22,6 +22,13 @@
             <argument name="imageUploader" xsi:type="object">Blog\Blog\PostUpload</argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="comment_data_source" xsi:type="string">Blog\Blog\Model\ResourceModel\Comment\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
     <virtualType name="Blog\Blog\PostUpload" type="Blog\Blog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">blog/tmp</argument>
@@ -32,6 +39,14 @@
                 <item name="gif" xsi:type="string">gif</item>
                 <item name="png" xsi:type="string">png</item>
             </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Blog\Blog\Model\ResourceModel\Comment\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">comment</argument>
+            <argument name="eventPrefix" xsi:type="string">blog_comment_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">comment_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Blog\Blog\Model\ResourceModel\Comment</argument>
         </arguments>
     </virtualType>
     <virtualType name="Blog\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
