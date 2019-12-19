@@ -4,17 +4,24 @@
 namespace Blog\Blog\Plugin\Block;
 
 use Magento\Framework\Data\Tree\NodeFactory;
+use Blog\Blog\Model\Config;
+
 class Topmenu
 {
     /**
      * @var NodeFactory
      */
     protected $nodeFactory;
+    protected $config;
     public function __construct(
-        NodeFactory $nodeFactory
-    ) {
+        NodeFactory $nodeFactory,
+        Config $config
+    )
+    {
         $this->nodeFactory = $nodeFactory;
+        $this->config = $config;
     }
+
     /**
      *
      * Inject node into menu.
@@ -24,7 +31,8 @@ class Topmenu
         $outermostClass = '',
         $childrenWrapClass = '',
         $limit = 0
-    ) {
+    )
+    {
         $node = $this->nodeFactory->create(
             [
                 'data' => $this->getNodeAsArray(),
@@ -34,14 +42,18 @@ class Topmenu
         );
         $subject->getMenu()->addChild($node);
     }
+
     /**
      *
      * Build node
      **/
     protected function getNodeAsArray()
     {
+        if(!$this->config->isDisplayInMenu()) {
+            return null;
+        }
         return [
-            'name' => __('Blog'),
+            'name' => __($this->config->getBlogTitle()),
             'id' => 'blog',
             'url' => '/blog/post',
             'has_active' => true,

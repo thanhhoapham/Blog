@@ -1,23 +1,35 @@
+<?php
+/**
+ * @var \Blog\Blog\Block\Frontend\Index $block
+ */
+    $posts = $block->getPost()->getData();
+?>
 <div class="blog-container">
     <div class="left float-left">
         <div class="top">
         </div>
         <div class="content">
+            <?php
+                foreach ($posts as $post):
+            ?>
             <div class="row">
                 <div class="col-4 float-left">
                     <a href="">
                         <div class="thumbnail">
-                            <img src="" alt="">
+                            <img src="http://www.magento-dev.com/media/blog/images/default_image.jpg" alt="image">
                         </div>
                     </a>
                 </div>
                 <div class="col-8 float-left">
-                    <h3 class="title"><a href=""</a></h3>
-                    <div class="description"></div>
-                    <div class="created_at"></div>
+                    <h3 class="title"><a href=""</a><?= $post['title'] ?></h3>
+                    <div class="description"><?= $post['short_description'] ?></div>
+                    <div class="created_at"><?= date('d-m-Y',strtotime($post['publish_date_from'])) ?></div>
                 </div>
                 <div class="clearfix"></div>
             </div>
+            <?php
+                endforeach;
+            ?>
         </div>
         <div class="bottom">
             <div class="paginate">
